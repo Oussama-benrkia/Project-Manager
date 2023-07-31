@@ -15,9 +15,16 @@ function checkIfEmpty(value) {
 
 function getemp(a) {
   const value_a = document.getElementById(a).value;
+  const eventtype = document.getElementById('eventtype').value;
+
   if (!checkIfEmpty(value_a)) {
     getFeedback(value_a).then(data => {
-      createemp(data);
+      if (eventtype=='update') {
+        createempup(data);
+      } else {
+        createemp(data);
+      }
+      
     });
   } else {
     console.log('empty');
@@ -56,6 +63,25 @@ data.forEach(element => {
   contentFeedDiv.appendChild(rowDiv);
 });
 }
+function createempup(data) {
+  const contentFeedDiv = document.getElementById('id_em');
+  const ee = document.getElementById('emp').value;
+  contentFeedDiv.replaceChildren();
+  const rowDiv = document.createElement('option');
+    rowDiv.textContent ='Add employee'; 
+    rowDiv.setAttribute('value','');
+    contentFeedDiv.appendChild(rowDiv);
+  data.forEach(element => {
+    const rowDiv = document.createElement('option');
+    rowDiv.textContent = element.name; 
+    rowDiv.setAttribute('value', element.id);
+    if(element.id==ee){
+      rowDiv.setAttribute ("selected", true);
+    }
+    contentFeedDiv.appendChild(rowDiv);
+  });
+  }
+
 function select_emp(event) {
 const value = event.target.value;
 if (!checkIfEmpty(value)) {

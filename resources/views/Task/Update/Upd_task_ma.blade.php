@@ -1,6 +1,6 @@
 
-
 <form class="row g-3 mb-6" Method="POST" action="{{route('task.update',['id'=>$data['task']->id])}}" >
+  <input type="hidden" value="update" id="eventtype">
     @csrf
     @method('POST')
       <div class="col-12 gy-6">
@@ -22,7 +22,7 @@
       </div>
         
         <div class="col-sm-6 col-md-4">
-          <select name="id_pr" class="form-select" id="id_pr"  onclick="getemp('id_pr')" data-options='{"removeItemButton":true,"placeholder":true}'>
+          <select name="id_pr" class="form-select" id="id_pr"  onclick="getempup('id_pr')" data-options='{"removeItemButton":true,"placeholder":true}'>
             <option value="" disabled> Projet</option>
             @foreach ($data['projet'] as $item)
                 <option value="{{$item->id}}" @if ($data['task']->pro_id==$item->id)

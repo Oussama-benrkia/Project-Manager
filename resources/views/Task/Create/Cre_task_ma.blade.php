@@ -1,5 +1,6 @@
 
 <form class="row g-3 mb-6" Method="POST" action="{{route('task.insert')}}" >
+  <input type="hidden" value="insert" id="eventtype">
     @csrf
     @method('POST')
       <div class="col-12 gy-6">
