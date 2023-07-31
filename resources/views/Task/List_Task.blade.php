@@ -69,8 +69,8 @@
                 @endif
               </tr>
             </thead>
-            <tbody class="list" id="project-list-table-body"><tr class="position-static">
-                @foreach ($data['task'] as $item)
+            <tbody class="list" id="project-list-table-body">
+                @foreach ($data['task'] as $item)<tr class="position-static">
                 @if (auth()->user()->role!='employee')
                 <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
                 <a class="fw-bold fs-0" href="{{route('task.show',['id'=>$item->id])}}">{{$item->name}}</a>

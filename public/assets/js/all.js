@@ -127,21 +127,16 @@ function createTimelineStep(title, date1, date2,linkHref) {
   timelineContent.setAttribute("data-trigger", "hover");
   timelineContent.setAttribute("data-placement", "top");
   timelineContent.setAttribute("title", "");
+  timelineContent.setAttribute("title",date1+' / '+date2);
+
   const innerCircle = document.createElement("div");
   innerCircle.classList.add("inner-circle");
   const taskTitle = document.createElement("p");
   taskTitle.classList.add("h6", "mt-3", "mb-1");
   taskTitle.textContent = title;
-  const dateSpan1 = document.createElement("span");
-  dateSpan1.classList.add("h6", "text-muted", "mb-0", "mb-lg-0");
-  dateSpan1.textContent = date1;
-  const dateSpan2 = document.createElement("span");
-  dateSpan2.classList.add("h6", "text-muted", "mb-0", "mb-lg-0");
-  dateSpan2.textContent = date2;
+  taskTitle.setAttribute("title",date1+' / '+date2);
   timelineContent.appendChild(innerCircle);
   timelineContent.appendChild(taskTitle);
-  timelineContent.appendChild(dateSpan1);
-  timelineContent.appendChild(dateSpan2);
   anchorTag.appendChild(timelineContent);
   timelineStep.appendChild(anchorTag);
   timelineStepsDiv.appendChild(timelineStep);
