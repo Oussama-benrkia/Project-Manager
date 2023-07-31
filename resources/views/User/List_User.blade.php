@@ -38,8 +38,9 @@
           <div class="d-flex align-items-center"><button onclick="window.location.assign('{{route('user.create')}}');" class="btn btn-primary"> <span class="fas fa-plus me-2"></span> Add member</button></div>
         </div>
       </div>
-      <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1">
-        @if (count($data)>0)  
+      
+        @if (count($data)>0) 
+        <div class="mx-n4 mx-lg-n6 px-4 px-lg-6 mb-9 bg-white border-y border-300 mt-2 position-relative top-1"> 
         <div class="table-responsive scrollbar ms-n1 ps-1">
         
           <table class="table table-sm fs--1 mb-0">
@@ -86,12 +87,12 @@
           </table>
         
         </div>
-         
+               </div>
         {{$data->links('pagination::bootstrap-5')}}
         @else
           <div class="alert alert-phoenix-primary" role="alert">NO user in app</div>
           @endif
-      </div>
+
     </div>
 
   </div>

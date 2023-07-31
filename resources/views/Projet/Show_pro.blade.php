@@ -255,10 +255,10 @@
                 @endforeach
                   </tbody>
                 </table>
-              </div>
+              </div>            </div>
               {{$data->tasks()->paginate(8)->links('pagination::bootstrap-5')}}
 
-            </div>
+
           </div>
         </div>
         @endif

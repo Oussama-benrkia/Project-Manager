@@ -62,7 +62,7 @@ class UserController extends Controller
                 'data' => $prj,
             ];
         }elseif (auth()->user()->role=='admin') {
-            $users = User::where('role', '<>', 'admin')->orderBy('created_at')->take(8)->get();
+            $users = User::where('role', '<>', 'admin')->orderBy('created_at','desc')->take(8)->get();
             $projects = Projet::orderBy('created_at')->take(8)->get();
             $myArray = [
                 'count' => [
@@ -185,7 +185,7 @@ class UserController extends Controller
             abort(403);
          }
          $data=[];
-         $hist=history::where('model', 'User')->where('model_id',$user->id)->orderBy('created_at')->limit(8)->get();
+         $hist=history::where('model', 'User')->where('model_id',$user->id)->orderBy('created_at','desc')->limit(8)->get();
          foreach ($hist as $value) {
             $ar = explode("_", $value->action);
             $user = User::find($value->model_id);
@@ -287,7 +287,7 @@ class UserController extends Controller
         $endDate = $startDate->copy()->addDays(14);
         $tasks = Task::where('emp_id', $id)
             ->whereBetween('date_deb', [$startDate, $endDate])
-            ->orderBy('date_deb')
+            ->orderBy('date_deb','desc')
             ->get();
         $data=[
             'data'=> $tasks,

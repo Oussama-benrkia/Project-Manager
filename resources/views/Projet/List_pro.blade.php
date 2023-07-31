@@ -56,8 +56,9 @@
           </div>
         </div>
 
-        <div class="table-responsive scrollbar">
+        
           @if (count($data)>0)
+          <div class="table-responsive scrollbar">
           <table class="table fs--1 mb-0 border-top border-200">
             <thead>
               <tr>
@@ -179,12 +180,12 @@
               @endforeach
                 </tbody>
           </table>
+        </div>
           {{$data->links('pagination::bootstrap-5')}}
           @else
             <p>No project</p>
           @endif
 
-        </div>
 
         
       </div>

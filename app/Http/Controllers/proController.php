@@ -213,7 +213,7 @@ class proController extends Controller
             $emp=User::whereIn('user_id',$mman)->where('role','employee')->get();
         }
            $data=[];
-           $hist=history::where('model', 'projets')->where('model_id',$project->id)->orderBy('created_at')->limit(8)->get();
+           $hist=history::where('model', 'projets')->where('model_id',$project->id)->orderBy('created_at','desc')->limit(8)->get();
            foreach ($hist as $value) {
             $ar = explode("_", $value->action);
             $time = explode(" ", $value->created_at);

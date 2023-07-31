@@ -10,11 +10,8 @@
               <h2 class="mb-0">History <span class="fw-normal text-700 ms-3">Task</span></h2>
             </div>
           </div>
-        
-    
-
-        <div class="table-responsive scrollbar">
           @if (count($data)>0)
+          <div class="table-responsive scrollbar">
           <table class="table fs--1 mb-0 border-top border-200">
             <thead>
               <tr>
@@ -66,12 +63,14 @@
               </td></tr>
               @endforeach
                 </tbody>
-          </table>
+                
+          </table></div>
+        </div>
           {{ $hist->links('pagination::bootstrap-5') }}
           @else
             <p>No History</p>
           @endif
-        </div>
+        
       </div>
     </div>
   </div>

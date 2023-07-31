@@ -208,8 +208,8 @@
                 </tbody>
           </table>
         </div>
-        {{$data['task']->links('pagination::bootstrap-5')}}
-      </div>
+        
+      </div>{{$data['task']->links('pagination::bootstrap-5')}}
     </div>
   </div>
 

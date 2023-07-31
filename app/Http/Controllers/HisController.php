@@ -17,7 +17,7 @@ class HisController extends Controller
     }
     public function history_pro()
 {
-    $hist = history::where('model', 'projets')->orderBy('created_at')->paginate(10); // 10 items per page
+    $hist = history::where('model', 'projets')->orderBy('created_at', 'desc')->paginate(10); // 10 items per page
     $data = [];
     foreach ($hist as $value) {
         $ar = explode("_", $value->action);
@@ -42,7 +42,7 @@ class HisController extends Controller
 }
 public function history_task()
 {
-    $hist = history::where('model', 'task')->orderBy('created_at')->paginate(10); // 10 items per page
+    $hist = history::where('model', 'task')->orderBy('created_at', 'desc')->paginate(10); // 10 items per page
     $data = [];
     foreach ($hist as $value) {
         $ar = explode("_", $value->action);
@@ -67,7 +67,7 @@ public function history_task()
 }
     public function history_User()
     {
-        $hist = history::where('model', 'User')->orderBy('created_at')->paginate(10); // 10 items per page
+        $hist = history::where('model', 'User')->orderBy('created_at', 'desc')->paginate(10); // 10 items per page
         $data = [];
         foreach ($hist as $value) {
             $ar = explode("_", $value->action);

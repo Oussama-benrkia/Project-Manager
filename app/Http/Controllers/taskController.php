@@ -327,7 +327,7 @@ class taskController extends Controller
             $emp=User::whereIn('user_id',$mman)->where('role','employee')->get();
         }
          $data = [];
-         $hist=history::where('model', 'task')->where('model_id',$task->id)->orderBy('created_at')->limit(8)->get();
+         $hist=history::where('model', 'task')->where('model_id',$task->id)->orderBy('created_at','desc')->limit(8)->get();
          foreach ($hist as $value) {
             $ar = explode("_", $value->action);
             $time = explode(" ", $value->created_at);

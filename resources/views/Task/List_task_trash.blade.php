@@ -110,9 +110,9 @@
                 @endforeach
                 </tbody>
           </table>
-        </div>
+        </div>      </div>
         {{$data['task']->links('pagination::bootstrap-5')}}
-      </div>
+
     </div>
   </div>
   <script>
