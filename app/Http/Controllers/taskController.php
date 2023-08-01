@@ -58,6 +58,9 @@ class taskController extends Controller
     public function edit_task_etat(Request $request){
         try{
         $etat=task::find($request->tag_id);
+        if(!$etat){
+            abort(404);
+        }
         if($etat->etat=='cancelled'){
             return ['message'=>'you cannot update etat of task'];
         }
@@ -106,7 +109,7 @@ class taskController extends Controller
             'name' => 'required|string|max:255',
             'id_pr' => 'required|exists:projets,id', 
             'id_em' => 'nullable|exists:users,id', 
-            'da_sta' => 'required|date', 
+            'da_sta' => 'required|date|after_or_equal:today', 
             'da_end' => 'required|date|after:da_sta', 
             'desc' => 'required|string',
         ]);
@@ -216,6 +219,9 @@ class taskController extends Controller
     public function show_edit(Request $request, $id)
     {
         $x=task::find($id);
+        if(!$x){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $x->man_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
@@ -262,12 +268,15 @@ class taskController extends Controller
 
     public function update(Request $request,$id){
         $existingTask = Task::find($id);
+        if(!$existingTask){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $existingTask->man_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
         $rules = [
             'name' => 'required|max:255',
-            'da_sta' => 'required|date',
+            'da_sta' => 'required|date|after_or_equal:today',
             'da_end' => 'required|date|after:da_sta',
             'etat' => 'required|in:new,completed,pending,cancelled',
             'id_pr' => 'required|exists:projets,id', 
@@ -310,6 +319,9 @@ class taskController extends Controller
 
     public function show($id){
         $task=Task::withTrashed()->find($id);
+        if(!$task){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $task->man_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
@@ -347,6 +359,9 @@ class taskController extends Controller
 
     function detach($id){
         $task=Task::find($id);
+        if(!$task){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $task->man_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
@@ -375,6 +390,9 @@ class taskController extends Controller
 
     public function restore($id){
         $task=task::withTrashed()->find($id);
+        if(!$task){
+            abort(404);
+        }
         if (!$task) {
             return redirect()->back()->with('error', 'task not found.');
         }
@@ -391,6 +409,9 @@ class taskController extends Controller
     public function edit_task_emp(Request $request,$id){
         if($request->has('id_emp')){
             $task =task::find($id);
+            if(!$task){
+                abort(404);
+            }
             $task->emp_id=$request->id_emp;
             $task->save();
             logAction('task_update_employeee', auth()->user()->id, 'task', $task->id, json_encode($task));

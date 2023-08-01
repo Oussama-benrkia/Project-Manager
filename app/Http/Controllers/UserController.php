@@ -153,6 +153,12 @@ class UserController extends Controller
     } 
     public function delete($id) {
         $user=User::find($id);
+        if(!$user){
+            abort(404);
+        }
+        if(!$user){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $user->user_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
@@ -181,6 +187,9 @@ class UserController extends Controller
     }
     public function show( $id){
         $user=User::withTrashed()->find($id);
+        if(!$user){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $user->user_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
@@ -210,6 +219,9 @@ class UserController extends Controller
     }
     public function edit($id){
         $x=User::find($id);
+        if(!$x){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $x->user_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
@@ -263,7 +275,7 @@ class UserController extends Controller
     public function restore($id){
         $user=User::withTrashed()->find($id);
         if (!$user) {
-            return redirect()->back()->with('error', 'Project not found.');
+            return redirect()->back()->with('error', 'user not found.');
         }
         $user->restore();
         if ($user->role === 'manager') {

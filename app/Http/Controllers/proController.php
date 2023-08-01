@@ -33,7 +33,7 @@ class proController extends Controller
     public function insert(Request $request){
         $rules = [
             'nom' => 'required|string|max:255',
-            'date_deb' => 'required|date',
+            'date_deb' => 'required|date|after_or_equal:today',
             'date_fin' => 'required|date|after_or_equal:date_deb',
             'desc' => 'required|string',
         ];
@@ -125,6 +125,9 @@ class proController extends Controller
     public function show_edit($id){
         
         $data=projet::find($id);
+        if(!$data){
+            abort(404);
+        }
         $man=null;
         if(!(auth()->user()->role==='manager' && $data->user_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
            abort(403);
@@ -136,13 +139,15 @@ class proController extends Controller
     }
     public function update(Request $request, $id)
     {        $existingTask = projet::find($id);
-
+        if(!$existingTask){
+            return redirect()->back();
+        }
         if(!(auth()->user()->role==='manager' && $existingTask->user_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
         abort(403);
      }
         $rules = [
             'nom' => 'required|string|max:255',
-            'date_deb' => 'required|date',
+            'date_deb' => 'required|date|after_or_equal:today',
             'date_fin' => 'required|date|after_or_equal:date_deb',
             'desc' => 'required|string',
         ];
@@ -174,6 +179,9 @@ class proController extends Controller
     }
     public function delete($id){
         $project = projet::find($id);
+        if(!$project){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $project->user_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
@@ -196,6 +204,9 @@ class proController extends Controller
     }
     public function show($id){
         $project = projet::withTrashed()->find($id);
+        if(!$project){
+            abort(404);
+        }
         if(!(auth()->user()->role==='manager' && $project->user_id==auth()->user()->id) && auth()->user()->role!=='admin' ){
             abort(403);
          }
