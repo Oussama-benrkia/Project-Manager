@@ -6,9 +6,41 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class authcontroller extends Controller
 {
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+
+        $userfind=User::where('gauth_id',$user->id)->first();
+        if($userfind){
+                    Auth::login($userfind);
+
+        return redirect()->route('home'); // Redirect to the desired page after login
+        }else{
+            $userfind=User::where('email',$user->email)->first();
+            if($userfind){
+                return redirect()->route('login')->withErrors(["login"=>"Gmail email is not connected to email in the app"]);
+            }else{
+                $newUser = User::create([
+                'firstName' =>$user->user['given_name']   ,
+                'lastName'=>$user->user['family_name'],
+                'email' => $user->getEmail(),
+                'password'=>Hash::make($user->getName().'1234'),
+                'role'=>'manager'
+                ]);
+                Auth::login($newUser);
+                return redirect('/home');
+                }
+        }
+
+    }
     public function index(){
         return view('Profile',['data'=>auth()->user()]);
     }

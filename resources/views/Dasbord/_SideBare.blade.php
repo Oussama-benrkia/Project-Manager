@@ -118,8 +118,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{route('user.create')}}" data-bs-toggle="" aria-expanded="false">
                     <div class="d-flex align-items-center"><span class="nav-link-text">Create User</span></div>
                   </a>
-                </li>
-             
+                </li>   
                 <li class="nav-item"><a class="nav-link" href="{{route('user.all')}}" data-bs-toggle="" aria-expanded="false">
                     <div class="d-flex align-items-center"><span class="nav-link-text">List User</span></div>
                   </a>
@@ -147,7 +146,7 @@
               <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="nv-hist">
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('history.project')}}" data-bs-toggle="" aria-expanded="false">
-                    <div class="d-flex align-items-center"><span class="nav-link-text">history User </span></div>
+                    <div class="d-flex align-items-center"><span class="nav-link-text">history Project </span></div>
                   </a> 
                 </li>
              

@@ -34,9 +34,13 @@ Route::middleware("guest")->group(function(){
  Route::post('/login',[authcontroller::class,'login'])->name('login.user');
  Route::get('/register',[authcontroller::class,'create'])->name('register');
  Route::post('/register',[authcontroller::class,'register'])->name('register.user');
-
+ Route::get('/auth/google', [authcontroller::class, 'redirectToGoogle']);
+ Route::get('/auth/google/callback', [authcontroller::class, 'handleGoogleCallback']);
 });
 Route::middleware("auth")->group(function(){
+    Route::get('/set-password',function(){
+        return view('RNPassword');
+    });
     Route::fallback(function(){
         return view('Error');
     });

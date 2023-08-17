@@ -114,6 +114,7 @@ class UserController extends Controller
             'role' => (auth()->user()->role === "manager") ? 'employee' : $validated["type"],
             'tel' => $validated["tel"],
             'image' => $imagePath,
+            'gauth_id'=>null,
         ];
         $user=User::create($data);
         logAction('User_created', auth()->user()->id, 'User', $user->id, json_encode($user));

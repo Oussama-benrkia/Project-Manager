@@ -13,7 +13,14 @@
           <div class="text-center mb-7">
             <h3 class="text-1000">Sign Up</h3>
             <p class="text-700">Create your account today</p>
-          
+            <form action="{{ url('/auth/google') }}" method="GET">
+              <button class="btn btn-phoenix-secondary w-100 mb-3"><span class="fab fa-google text-danger me-2 fs--1"></span> Sign in with google</button>
+              @csrf
+            </form>
+            <div class="position-relative">
+              <hr class="bg-200 mt-5 mb-4">
+              <div class="divider-content-center">or use email</div>
+            </div>
           <form method="POST" action="{{route('register.user')}}">
             @csrf
             @method('POST')
